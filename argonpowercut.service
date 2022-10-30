@@ -1,0 +1,14 @@
+[Unit]
+Description=Send power cut signal
+DefaultDependencies=
+noConflicts=reboot.target
+Before=poweroff.target halt.target shutdown.target
+Requires=poweroff.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/argonpowercut
+startRemainAfterExit=yes
+
+[Install]
+WantedBy=shutdown.target

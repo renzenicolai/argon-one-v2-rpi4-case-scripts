@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+mintemp=35
+maxtemp=55
+
+temperature=`cat /sys/class/thermal/thermal_zone0/temp`
+temperature=$((temperature / 1000))
+
+tempin=temperature
+
+if (( tempin > maxtemp)); then
+  tempin=maxtemp
+fi
+
+if (( tempin < mintemp)); then
+  tempin=mintemp
+fi
+
+fanspeed=$(((tempin-mintemp)*100/(maxtemp-mintemp)))
+
+echo $temperature " degrees, speed set to " $fanspeed "%"
+
+i2cset -y 1 0x1a $fanspeed

@@ -1,0 +1,5 @@
+[Unit]
+Description=Set case fan speed
+
+[Service]
+ExecStart=/usr/local/bin/argonfan

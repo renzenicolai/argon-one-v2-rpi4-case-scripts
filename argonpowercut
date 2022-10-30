@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ "$1" == "poweroff" || "$1" == "halt" ]]
+then
+  echo "Sending power cut signal to Argon case microcontroller..."
+  i2cset -y 1 0x1a 0xFF
+fi
